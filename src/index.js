@@ -3,7 +3,7 @@ const morgan = require("morgan");
 const apiRoutes = require("./routes");
 const { Limiter } = require("./utils/common");
 
-const { ServerConfig, Logger } = require("./config");
+const { ServerConfig, Logger, QueueConfig } = require("./config");
 
 const app = express();
 
@@ -16,8 +16,9 @@ app.use([
 
 app.use("/api", apiRoutes);
 
-app.listen(ServerConfig.PORT, () => {
+app.listen(ServerConfig.PORT, async() => {
     console.log(`server is running on ${ServerConfig.PORT}`);
+    await QueueConfig.connectQueue();
 
     // Logger.log({
     //     label: 'root-file: index.js',

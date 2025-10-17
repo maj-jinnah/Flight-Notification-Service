@@ -9,8 +9,7 @@ async function sendEmail({ from, to, subject, html, text }) {
             from: ServerConfig.EMAIL_USER,
             to,
             subject,
-            text,
-            html,
+            text
         });
 
         console.log('Email sent:', info.response);
